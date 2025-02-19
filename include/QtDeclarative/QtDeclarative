@@ -4,7 +4,6 @@
 #include <QtGui/QtGui>
 #include <QtScript/QtScript>
 #include <QtNetwork/QtNetwork>
-#include "qdeclarativedebug.h"
 #include "qdeclarative.h"
 #include "qdeclarativecomponent.h"
 #include "qdeclarativecontext.h"
@@ -24,6 +23,7 @@
 #include "qdeclarativepropertyvaluesource.h"
 #include "qdeclarativescriptstring.h"
 #include "qdeclarativeitem.h"
+#include "qdeclarativedebug.h"
 #include "qdeclarativepropertymap.h"
 #include "qdeclarativeview.h"
 #endif

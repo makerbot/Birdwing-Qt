@@ -6,7 +6,7 @@
 # in the future we may get an accelerated hardware chip and the install for qt5 may become
 # more supported.  It appears that porting applications from 4.8 to 5.0 is relatively straightforward
 
-# syntax: ./build_qt.py /path/to/nfs
+# syntax: ./build_qt.py [/path/to/sshfs]
 
 import sys
 import os
@@ -78,14 +78,13 @@ def install_tree(src, tgt):
         shutil.rmtree(tgtpath)
     shutil.copytree(srcpath, tgtpath)
 
-# Need to match a glob pattern and preserve symlinks on copy
-# Would be a real pain to do this properly in python
-'''
-subprocess.check_call('cp -a %s %s' %
-    (os.path.join(tmpInstallDir, 'lib', '*.so*'), 
-     os.path.join(sys.argv[1], 'usr', 'lib')), shell=True)
+if len(sys.argv) > 1:
+    # Need to match a glob pattern and preserve symlinks on copy
+    # Would be a real pain to do this properly in python
+    subprocess.check_call('cp -a %s %s' %
+        (os.path.join(tmpInstallDir, 'lib', '*.so*'), 
+         os.path.join(sys.argv[1], 'usr', 'lib')), shell=True)
 
-install_tree('lib/fonts', 'usr/lib/fonts')
-if os.path.exists(os.path.join(sys.argv[1], 'usr/apps/printerpanel')):
-    install_tree('plugins/imageformats', 'usr/apps/printerpanel/imageformats')
-'''
+    install_tree('lib/fonts', 'usr/lib/fonts')
+    if os.path.exists(os.path.join(sys.argv[1], 'usr/apps/printerpanel')):
+        install_tree('plugins/imageformats', 'usr/apps/printerpanel/imageformats')
